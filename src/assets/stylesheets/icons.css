@@ -1,0 +1,22 @@
+/* Sun */
+.lucide-sun-icon {
+  color: var(--yellow-400);
+}
+
+/* Thermometer Sun */
+.lucide-thermometer-sun-icon path:nth-child(1),
+.lucide-thermometer-sun-icon path:nth-child(2),
+.lucide-thermometer-sun-icon path:nth-child(3),
+.lucide-thermometer-sun-icon path:nth-child(5),
+.lucide-thermometer-sun-icon path:nth-child(6) {
+  color: var(--yellow-400);
+}
+
+/* Thermometer Snowflake */
+.lucide-thermometer-snowflake-icon path:nth-child(1),
+.lucide-thermometer-snowflake-icon path:nth-child(2),
+.lucide-thermometer-snowflake-icon path:nth-child(3),
+.lucide-thermometer-snowflake-icon path:nth-child(4),
+.lucide-thermometer-snowflake-icon path:nth-child(5) {
+  color: var(--sky-400);
+}
