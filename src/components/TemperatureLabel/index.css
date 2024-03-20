@@ -1,0 +1,17 @@
+.temperature-label-high {
+  color: var(--red-800);
+}
+
+.temperature-label-low {
+  color: var(--sky-800);
+}
+
+@media (prefers-color-scheme: dark) {
+  .temperature-label-high {
+    color: var(--red-200);
+  }
+
+  .temperature-label-low {
+    color: var(--sky-200);
+  }
+}
