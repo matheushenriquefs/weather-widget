@@ -1,10 +1,10 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    label?: "high" | "low";
+    label?: "max" | "min";
   }>(),
   {
-    label: "high",
+    label: "max",
   },
 );
 </script>
