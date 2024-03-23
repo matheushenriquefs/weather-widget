@@ -1,0 +1,1 @@
+export { useGetDailyForecastsFn } from "./useGetDailyForecastsFn";
