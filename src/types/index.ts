@@ -1,5 +1,7 @@
 import { codes } from "../utils/codes";
 
+export type WeatherCode = keyof typeof codes;
+
 export type DailyForecast = {
   date: number;
   temperature: {
@@ -7,7 +9,7 @@ export type DailyForecast = {
     max: number;
   };
   weather: {
-    code: number;
+    code: WeatherCode;
     label: string;
   };
 };
@@ -20,7 +22,7 @@ export type CurrentForecast = {
     apparent: number;
   };
   weather: {
-    code: number;
+    code: WeatherCode;
     label: string;
   };
   wind: {
@@ -34,5 +36,3 @@ export type WeatherForecast = {
   current: CurrentForecast | null;
   daily: DailyForecast[];
 };
-
-export type WeatherCode = keyof typeof codes;
