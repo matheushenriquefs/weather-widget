@@ -27,28 +27,30 @@ const props = withDefaults(
   },
 );
 
-const date = computed(() =>
-  new Intl.DateTimeFormat(undefined, {
+const date = computed(() => {
+  const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
+
+  return new Intl.DateTimeFormat(undefined, {
     weekday: "short",
   })
-    .format(props.dailyForecast.date)
+    .format(props.dailyForecast.date + timezoneOffset)
     .split("")
     .map((letter, i) => (i === 0 ? letter.toUpperCase() : letter))
-    .join(""),
-);
+    .join("");
+});
 const ForecastIcon = computed(() => useGetForecastIconFn(props.dailyForecast));
 </script>
 
 <template>
   <article class="daily-forecast">
     <header class="daily-forecast-header">
-      <ThePlaceholder :is-loading style="width: 32px">
+      <ThePlaceholder :is-loading="isLoading" style="width: 32px">
         <h3 class="daily-forecast-text-highlight" aria-busy="false">
           {{ date }}
         </h3>
       </ThePlaceholder>
       <ThePlaceholder
-        :is-loading
+        :is-loading="isLoading"
         style="width: 32px; height: 32px; margin-bottom: 16px"
       >
         <component
@@ -60,12 +62,12 @@ const ForecastIcon = computed(() => useGetForecastIconFn(props.dailyForecast));
       </ThePlaceholder>
     </header>
     <footer class="daily-forecast-footer">
-      <ThePlaceholder :is-loading style="width: 18px; height: 14px">
+      <ThePlaceholder :is-loading="isLoading" style="width: 18px; height: 14px">
         <TemperatureLabel aria-busy="false"
           >{{ dailyForecast.temperature.max }}˚C</TemperatureLabel
         >
       </ThePlaceholder>
-      <ThePlaceholder :is-loading style="width: 18px; height: 14px">
+      <ThePlaceholder :is-loading="isLoading" style="width: 18px; height: 14px">
         <TemperatureLabel aria-busy="false" label="min"
           >{{ dailyForecast.temperature.min }}˚C</TemperatureLabel
         >
