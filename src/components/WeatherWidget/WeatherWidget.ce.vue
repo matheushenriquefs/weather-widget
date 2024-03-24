@@ -6,23 +6,14 @@ import { CurrentForecast } from "../CurrentForecast";
 import { DailyForecast } from "../DailyForecast";
 import { useGetCurrentForecastFn } from "../../composables/useGetCurrentForecastFn";
 import { useGetDailyForecastsFn } from "../../composables/useGetDailyForecastsFn";
-import {
-  type NominatimReverseGeocoding,
-  type GroupedForecast,
-} from "../../types";
+import { useGetForecastParamsFn } from "../../composables/useGetForecastParamsFn";
+import { type GroupedForecast, type WeatherWidgetProps } from "../../types";
 
-const props = withDefaults(
-  defineProps<{
-    lat?: number;
-    lon?: number;
-    location?: string;
-  }>(),
-  {
-    lat: 0,
-    lon: 0,
-    location: "",
-  },
-);
+const props = withDefaults(defineProps<WeatherWidgetProps>(), {
+  lat: 0,
+  lon: 0,
+  location: "",
+});
 
 const groupedForecast = ref<GroupedForecast>({
   location: "",
@@ -32,47 +23,16 @@ const groupedForecast = ref<GroupedForecast>({
 const isLoading = ref(true);
 
 onBeforeMount(async () => {
-  const params = {
-    latitude: props.lat,
-    longitude: props.lon,
-    current: [
-      "weather_code",
-      "temperature_2m",
-      "apparent_temperature",
-      "relative_humidity_2m",
-      "rain",
-      "wind_speed_10m",
-    ],
-    daily: ["weather_code", "temperature_2m_min", "temperature_2m_max"],
-  };
-  let location = props.location;
-
-  if (!props.lat || !props.lon) {
-    params.latitude = 51.477928;
-    params.longitude = -0.001545;
-    location = "London";
-  }
-
-  if (!location) {
-    const fetchedLocation: NominatimReverseGeocoding = await (
-      await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${params.latitude}&lon=${params.longitude}`,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        },
-      )
-    ).json();
-
-    location = fetchedLocation.address.city;
-  }
+  const forecastParams = await useGetForecastParamsFn(props);
 
   const url = "https://api.open-meteo.com/v1/forecast";
-  const [response] = await fetchWeatherApi(url, params);
+  const [response] = await fetchWeatherApi(url, forecastParams.params);
   const current = response.current();
   const daily = response.daily();
-  const currentForecast = useGetCurrentForecastFn(current, params.current);
+  const currentForecast = useGetCurrentForecastFn(
+    current,
+    forecastParams.params.current,
+  );
   const dailyForecasts = useGetDailyForecastsFn(
     daily,
     {
@@ -80,10 +40,10 @@ onBeforeMount(async () => {
       end: Number(daily!.timeEnd()) * 1000,
       interval: daily!.interval() * 1000,
     },
-    params.daily,
+    forecastParams.params.daily,
   );
   groupedForecast.value = {
-    location,
+    location: forecastParams.location,
     current: currentForecast,
     daily: dailyForecasts,
   };

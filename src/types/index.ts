@@ -43,3 +43,9 @@ export type NominatimReverseGeocoding = {
     city: string;
   };
 };
+
+export type WeatherWidgetProps = {
+  lat?: number;
+  lon?: number;
+  location?: string;
+};
