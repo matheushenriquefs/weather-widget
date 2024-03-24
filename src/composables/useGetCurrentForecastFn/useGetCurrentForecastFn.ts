@@ -34,7 +34,7 @@ export const useGetCurrentForecastFn = (
   const rainIndex = options.indexOf("rain");
   const windSpeedIndex = options.indexOf("wind_speed_10m");
   const date = Number(current.time()) * 1000;
-  const code = current.variables(weatherCodeIndex)!.value();
+  const code = current.variables(weatherCodeIndex)!.value() as WeatherCode;
 
   return {
     date,
@@ -47,7 +47,7 @@ export const useGetCurrentForecastFn = (
     },
     weather: {
       code,
-      label: useGetWeatherLabelFn(code as WeatherCode).label,
+      label: useGetWeatherLabelFn(code).label,
     },
     wind: {
       speed: Math.round(current.variables(windSpeedIndex)!.value()),

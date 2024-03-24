@@ -25,7 +25,9 @@ export const useGetDailyForecastsFn = (
     const weatherCodeIndex = options.indexOf("weather_code");
     const minTemperatureIndex = options.indexOf("temperature_2m_min");
     const maxTemperatureIndex = options.indexOf("temperature_2m_max");
-    const code = daily.variables(weatherCodeIndex)!.valuesArray()![index];
+    const code = daily.variables(weatherCodeIndex)!.valuesArray()![
+      index
+    ] as WeatherCode;
 
     dailyForecasts.push({
       date: nextDate,
@@ -38,8 +40,8 @@ export const useGetDailyForecastsFn = (
         ),
       },
       weather: {
-        code: code,
-        label: useGetWeatherLabelFn(code as WeatherCode).label,
+        code,
+        label: useGetWeatherLabelFn(code).label,
       },
     });
     nextDate = nextDate + date.interval;
