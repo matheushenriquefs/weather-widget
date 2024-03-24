@@ -2,6 +2,7 @@
   --neutral-100: #f4f4f5;
   --neutral-200: #e5e5e5;
   --neutral-300: #d4d4d4;
+  --neutral-500: #737373;
   --neutral-700: #404040;
   --neutral-800: #262626;
   --neutral-900: #171717;
@@ -11,10 +12,13 @@
   --red-400: #f87171;
   --red-800: #991b1b;
 
+  --yellow-300: #fde047;
   --yellow-400: #facc15;
 
   --sky-200: #bae6fd;
+  --sky-300: #7dd3fc;
   --sky-400: #38bdf8;
+  --sky-500: #06b6d4;
   --sky-800: #075985;
 
   --spacing-small: 8px;

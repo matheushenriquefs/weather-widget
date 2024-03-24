@@ -3,20 +3,136 @@
   color: var(--yellow-400);
 }
 
-/* Thermometer Sun */
-.lucide-thermometer-sun-icon path:nth-child(1),
-.lucide-thermometer-sun-icon path:nth-child(2),
-.lucide-thermometer-sun-icon path:nth-child(3),
-.lucide-thermometer-sun-icon path:nth-child(5),
-.lucide-thermometer-sun-icon path:nth-child(6) {
+/* Sun Medium */
+.lucide-sun-medium-icon {
   color: var(--yellow-400);
 }
 
-/* Thermometer Snowflake */
-.lucide-thermometer-snowflake-icon path:nth-child(1),
-.lucide-thermometer-snowflake-icon path:nth-child(2),
-.lucide-thermometer-snowflake-icon path:nth-child(3),
-.lucide-thermometer-snowflake-icon path:nth-child(4),
-.lucide-thermometer-snowflake-icon path:nth-child(5) {
-  color: var(--sky-400);
+/* Cloud Sun */
+.lucide-cloud-sun-icon path:not(:last-child) {
+  color: var(--yellow-400);
+}
+
+.lucide-cloud-sun-icon path:last-child {
+  color: var(--neutral-500);
+}
+
+/* Cloud Fog */
+.lucide-cloud-fog-icon path:first-child {
+  color: var(--neutral-500);
+}
+
+.lucide-cloud-fog-icon path:not(:first-child) {
+  color: var(--sky-500);
+}
+
+/* Cloud Drizzle */
+.lucide-cloud-drizzle-icon path:first-child {
+  color: var(--neutral-500);
+}
+
+.lucide-cloud-drizzle-icon path:not(:first-child) {
+  color: var(--sky-500);
+}
+
+/* Cloud Snow */
+.lucide-cloud-snow-icon path:first-child {
+  color: var(--neutral-500);
+}
+
+.lucide-cloud-snow-icon path:not(:first-child) {
+  color: var(--sky-300);
+}
+
+/* Cloud Rain */
+.lucide-cloud-rain-icon path:first-child {
+  color: var(--neutral-500);
+}
+
+.lucide-cloud-rain-icon path:not(:first-child) {
+  color: var(--sky-500);
+}
+
+/* Cloud Rain Wind */
+.lucide-cloud-rain-wind-icon path:first-child {
+  color: var(--neutral-500);
+}
+
+.lucide-cloud-rain-wind-icon path:not(:first-child) {
+  color: var(--sky-500);
+}
+
+/* Cloud Lightning */
+.lucide-cloud-lightning-icon path:first-child {
+  color: var(--neutral-500);
+}
+
+.lucide-cloud-lightning-icon path:not(:first-child) {
+  color: var(--yellow-400);
+}
+
+/* Cloud Hail */
+.lucide-cloud-hail-icon path:first-child {
+  color: var(--neutral-500);
+}
+
+.lucide-cloud-hail-icon path:not(:first-child) {
+  color: var(--sky-300);
+}
+
+/* Snowflake */
+.lucide-snowflake-icon {
+  color: var(--sky-300);
+}
+
+/* Cloudy */
+.lucide-cloudy-icon {
+  color: var(--neutral-500);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Cloud Sun */
+  .lucide-cloud-sun-icon path:last-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloud Fog */
+  .lucide-cloud-fog-icon path:first-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloud Drizzle */
+  .lucide-cloud-drizzle-icon path:first-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloud Snow */
+  .lucide-cloud-snow-icon path:first-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloud Rain */
+  .lucide-cloud-rain-icon path:first-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloud Rain Wind */
+  .lucide-cloud-rain-wind-icon path:first-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloud Lightning */
+  .lucide-cloud-lightning-icon path:first-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloud Hail */
+  .lucide-cloud-hail-icon path:first-child {
+    color: var(--neutral-200);
+  }
+
+  /* Cloudy */
+  .lucide-cloudy-icon {
+    color: var(--neutral-200);
+  }
 }

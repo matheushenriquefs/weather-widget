@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Sun as SunIcon } from "lucide-vue-next";
-import { computedEager } from "@vueuse/core";
+import { computed } from "vue";
 
 import { ThePlaceholder } from "../ThePlaceholder";
 import { TemperatureLabel } from "../TemperatureLabel";
+import { useGetForecastIconFn } from "../../composables/useGetForecastIconFn";
 import { type DailyForecast } from "../../types";
 
 const props = withDefaults(
@@ -21,13 +21,13 @@ const props = withDefaults(
       },
       weather: {
         code: 0,
-        label: ''
-      }
+        label: "",
+      },
     }),
   },
 );
 
-const date = computedEager(() =>
+const date = computed(() =>
   new Intl.DateTimeFormat(undefined, {
     weekday: "short",
   })
@@ -36,6 +36,7 @@ const date = computedEager(() =>
     .map((letter, i) => (i === 0 ? letter.toUpperCase() : letter))
     .join(""),
 );
+const ForecastIcon = computed(() => useGetForecastIconFn(props.dailyForecast));
 </script>
 
 <template>
@@ -50,7 +51,12 @@ const date = computedEager(() =>
         :is-loading
         style="width: 32px; height: 32px; margin-bottom: 16px"
       >
-        <SunIcon :size="32" class="daily-forecast-icon" aria-busy="false" />
+        <component
+          :is="ForecastIcon"
+          :size="32"
+          class="daily-forecast-icon"
+          aria-busy="false"
+        />
       </ThePlaceholder>
     </header>
     <footer class="daily-forecast-footer">

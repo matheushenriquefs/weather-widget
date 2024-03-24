@@ -1,19 +1,24 @@
 <script setup lang="ts">
-import { Sun as SunIcon } from "lucide-vue-next";
+import { computed } from "vue";
 
 import { ThePlaceholder } from "../ThePlaceholder";
-import { useGetCurrentForecast } from "../../composables/useGetCurrentForecast";
+import { useGetCurrentForecastFn } from "../../composables/useGetCurrentForecastFn";
+import { useGetForecastIconFn } from "../../composables/useGetForecastIconFn";
 import { type CurrentForecast } from "../../types";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     isLoading?: boolean;
     currentForecast?: CurrentForecast;
   }>(),
   {
     isLoading: true,
-    currentForecast: () => useGetCurrentForecast(null, []),
+    currentForecast: () => useGetCurrentForecastFn(null, []),
   },
+);
+
+const ForecastIcon = computed(() =>
+  useGetForecastIconFn(props.currentForecast),
 );
 </script>
 
@@ -31,7 +36,12 @@ withDefaults(
     </section>
     <div class="column current-forecast-column">
       <ThePlaceholder :is-loading style="width: 100%; height: 48px">
-        <SunIcon :size="48" aria-busy="false" style="margin: 4px" />
+        <component
+          :is="ForecastIcon"
+          :size="48"
+          aria-busy="false"
+          style="margin: 4px"
+        />
       </ThePlaceholder>
       <ThePlaceholder :is-loading style="width: 100%; height: 24px">
         <small class="current-forecast-weather" aria-busy="false">{{
