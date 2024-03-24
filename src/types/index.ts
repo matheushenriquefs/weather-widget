@@ -32,7 +32,14 @@ export type CurrentForecast = {
   rain: number;
 };
 
-export type WeatherForecast = {
-  current: CurrentForecast | null;
+export type GroupedForecast = {
+  location: string;
+  current: CurrentForecast | undefined;
   daily: DailyForecast[];
+};
+
+export type NominatimReverseGeocoding = {
+  address: {
+    city: string;
+  };
 };

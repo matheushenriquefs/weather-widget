@@ -6,31 +6,35 @@ import { CurrentForecast } from "../CurrentForecast";
 import { DailyForecast } from "../DailyForecast";
 import { useGetCurrentForecastFn } from "../../composables/useGetCurrentForecastFn";
 import { useGetDailyForecastsFn } from "../../composables/useGetDailyForecastsFn";
-import { type WeatherForecast } from "../../types";
+import {
+  type NominatimReverseGeocoding,
+  type GroupedForecast,
+} from "../../types";
 
 const props = withDefaults(
   defineProps<{
-    latitude?: number;
-    longitude?: number;
+    lat?: number;
+    lon?: number;
+    location?: string;
   }>(),
   {
-    latitude: 51.477928, // prime meridian
-    longitude: -0.001545, // prime meridian
+    lat: 0,
+    lon: 0,
+    location: "",
   },
 );
 
-const weatherForecast = ref<WeatherForecast>({
-  current: null,
+const groupedForecast = ref<GroupedForecast>({
+  location: "",
+  current: undefined,
   daily: [],
 });
 const isLoading = ref(true);
 
 onBeforeMount(async () => {
   const params = {
-    // latitude: -23.5475,
-    // longitude: -46.6361,
-    latitude: props.latitude,
-    longitude: props.longitude,
+    latitude: props.lat,
+    longitude: props.lon,
     current: [
       "weather_code",
       "temperature_2m",
@@ -41,6 +45,29 @@ onBeforeMount(async () => {
     ],
     daily: ["weather_code", "temperature_2m_min", "temperature_2m_max"],
   };
+  let location = props.location;
+
+  if (!props.lat || !props.lon) {
+    params.latitude = 51.477928;
+    params.longitude = -0.001545;
+    location = "London";
+  }
+
+  if (!location) {
+    const fetchedLocation: NominatimReverseGeocoding = await (
+      await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${params.latitude}&lon=${params.longitude}`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      )
+    ).json();
+
+    location = fetchedLocation.address.city;
+  }
+
   const url = "https://api.open-meteo.com/v1/forecast";
   const [response] = await fetchWeatherApi(url, params);
   const current = response.current();
@@ -55,7 +82,8 @@ onBeforeMount(async () => {
     },
     params.daily,
   );
-  weatherForecast.value = {
+  groupedForecast.value = {
+    location,
     current: currentForecast,
     daily: dailyForecasts,
   };
@@ -72,19 +100,18 @@ onBeforeMount(async () => {
       rel="stylesheet"
     />
     <CurrentForecast
-      :current-forecast="
-        weatherForecast.current ? weatherForecast.current : undefined
-      "
-      :is-loading
+      :current-forecast="groupedForecast.current"
+      :is-loading="isLoading"
+      :location="groupedForecast.location"
       class="grid current-forecast-grid"
     />
     <div class="grid daily-forecast-container">
       <div class="daily-forecast-grid">
         <DailyForecast
-          v-for="(dailyForecast, i) in weatherForecast.daily"
+          v-for="(dailyForecast, i) in groupedForecast.daily"
           :key="i"
-          :is-loading
-          :daily-forecast
+          :is-loading="isLoading"
+          :daily-forecast="dailyForecast"
           class="column"
         />
       </div>
