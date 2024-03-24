@@ -1,7 +1,7 @@
 import { type VariablesWithTime } from "@openmeteo/sdk/variables-with-time";
 
 import { useGetWeatherLabelFn } from "../useGetWeatherLabelFn";
-import { type CurrentForecast } from "../../types";
+import { type CurrentForecast, type WeatherCode } from "../../types";
 
 export const useGetCurrentForecastFn = (
   current: VariablesWithTime | null,
@@ -17,7 +17,7 @@ export const useGetCurrentForecastFn = (
       },
       weather: {
         code: 0,
-        label: useGetWeatherLabelFn(0),
+        label: useGetWeatherLabelFn(0).label,
       },
       wind: {
         speed: 0,
@@ -47,7 +47,7 @@ export const useGetCurrentForecastFn = (
     },
     weather: {
       code,
-      label: useGetWeatherLabelFn(code as any),
+      label: useGetWeatherLabelFn(code as WeatherCode).label,
     },
     wind: {
       speed: Math.round(current.variables(windSpeedIndex)!.value()),

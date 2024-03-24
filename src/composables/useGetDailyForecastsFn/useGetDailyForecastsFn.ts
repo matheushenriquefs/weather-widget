@@ -1,7 +1,7 @@
 import { type VariablesWithTime } from "@openmeteo/sdk/variables-with-time";
 
 import { useGetWeatherLabelFn } from "../useGetWeatherLabelFn";
-import { type DailyForecast } from "../../types";
+import { type DailyForecast, type WeatherCode } from "../../types";
 
 export const useGetDailyForecastsFn = (
   daily: VariablesWithTime | null,
@@ -39,7 +39,7 @@ export const useGetDailyForecastsFn = (
       },
       weather: {
         code: code,
-        label: useGetWeatherLabelFn(code as any),
+        label: useGetWeatherLabelFn(code as WeatherCode).label,
       },
     });
     nextDate = nextDate + date.interval;

@@ -1,3 +1,5 @@
+import { codes } from "../utils/codes";
+
 export type DailyForecast = {
   date: number;
   temperature: {
@@ -27,3 +29,10 @@ export type CurrentForecast = {
   relativeHumidity: number;
   rain: number;
 };
+
+export type WeatherForecast = {
+  current: CurrentForecast | null;
+  daily: DailyForecast[];
+};
+
+export type WeatherCode = keyof typeof codes;
