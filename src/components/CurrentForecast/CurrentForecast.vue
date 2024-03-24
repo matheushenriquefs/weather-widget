@@ -10,6 +10,7 @@ const props = withDefaults(
   defineProps<{
     isLoading?: boolean;
     currentForecast?: CurrentForecast;
+    location: string;
   }>(),
   {
     isLoading: true,
@@ -25,17 +26,17 @@ const ForecastIcon = computed(() =>
 <template>
   <div>
     <section class="column current-forecast-column overflow-hidden">
-      <ThePlaceholder :is-loading style="width: 100%; height: 48px">
-        <h1 class="text-highlight" aria-busy="false">New York</h1>
+      <ThePlaceholder :is-loading="isLoading" style="width: 100%; height: 48px">
+        <h1 class="text-highlight" aria-busy="false">{{ location }}</h1>
       </ThePlaceholder>
-      <ThePlaceholder style="width: 100%; height: 24px" :is-loading>
+      <ThePlaceholder style="width: 100%; height: 24px" :is-loading="isLoading">
         <small class="current-forecast-weather" aria-busy="false"
           >Feels like {{ currentForecast.temperature.apparent }}˚C</small
         >
       </ThePlaceholder>
     </section>
     <div class="column current-forecast-column">
-      <ThePlaceholder :is-loading style="width: 100%; height: 48px">
+      <ThePlaceholder :is-loading="isLoading" style="width: 100%; height: 48px">
         <component
           :is="ForecastIcon"
           :size="48"
@@ -43,19 +44,19 @@ const ForecastIcon = computed(() =>
           style="margin: 4px"
         />
       </ThePlaceholder>
-      <ThePlaceholder :is-loading style="width: 100%; height: 24px">
+      <ThePlaceholder :is-loading="isLoading" style="width: 100%; height: 24px">
         <small class="current-forecast-weather" aria-busy="false">{{
           currentForecast.weather.label
         }}</small>
       </ThePlaceholder>
     </div>
     <section class="column current-forecast-column">
-      <ThePlaceholder :is-loading style="width: 100%; height: 48px">
+      <ThePlaceholder :is-loading="isLoading" style="width: 100%; height: 48px">
         <h2 class="text-highlight" aria-busy="false">
           {{ currentForecast.temperature.max }}˚C
         </h2>
       </ThePlaceholder>
-      <ThePlaceholder :is-loading style="width: 100%; height: 24px">
+      <ThePlaceholder :is-loading="isLoading" style="width: 100%; height: 24px">
         <div class="current-forecast-conditions">
           <small>Rain: {{ currentForecast.rain }}%</small>
           <small>Humidity: {{ currentForecast.relativeHumidity }}%</small>
