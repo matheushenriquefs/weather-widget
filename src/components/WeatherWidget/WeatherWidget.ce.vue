@@ -24,8 +24,7 @@ const isLoading = ref(true);
 
 onBeforeMount(async () => {
   const forecastParams = await useGetForecastParamsFn(props);
-
-  const url = "https://api.open-meteo.com/v1/forecast";
+  const url = `${import.meta.env.VITE_OPEN_METEO_API_URL}/forecast`;
   const [response] = await fetchWeatherApi(url, forecastParams.params);
   const current = response.current();
   const daily = response.daily();
@@ -66,11 +65,19 @@ onBeforeMount(async () => {
       class="grid current-forecast-grid"
     />
     <div class="grid daily-forecast-container">
-      <div class="daily-forecast-grid">
+      <div v-if="isLoading" class="daily-forecast-grid">
         <DailyForecast
-          v-for="(dailyForecast, i) in groupedForecast.daily"
+          v-for="i in 7"
           :key="i"
           :is-loading="isLoading"
+          class="column"
+        />
+      </div>
+      <div v-else class="daily-forecast-grid">
+        <DailyForecast
+          v-for="(dailyForecast, i) in groupedForecast.daily"
+          :key="i + 1"
+          :is-loading="false"
           :daily-forecast="dailyForecast"
           class="column"
         />
