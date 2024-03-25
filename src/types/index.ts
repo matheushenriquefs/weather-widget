@@ -38,7 +38,7 @@ export type GroupedForecast = {
   daily: DailyForecast[];
 };
 
-export type NominatimReverseGeocoding = {
+export type LocationAddress = {
   address: {
     city: string;
   };

@@ -1,7 +1,4 @@
-import {
-  type WeatherWidgetProps,
-  type NominatimReverseGeocoding,
-} from "../../types";
+import { type WeatherWidgetProps, type LocationAddress } from "../../types";
 
 export const useGetForecastParamsFn = async (props: WeatherWidgetProps) => {
   const params = {
@@ -26,9 +23,9 @@ export const useGetForecastParamsFn = async (props: WeatherWidgetProps) => {
   }
 
   if (!location) {
-    const fetchedLocation: NominatimReverseGeocoding = await (
+    const fetchedLocation: LocationAddress = await (
       await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${params.latitude}&lon=${params.longitude}`,
+        `${import.meta.env.VITE_NOMINATIM_API_URL}/reverse?format=json&lat=${params.latitude}&lon=${params.longitude}`,
         {
           headers: {
             Accept: "application/json",
