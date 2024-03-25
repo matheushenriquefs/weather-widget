@@ -2,18 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/node_modules/modress/dist/modress.min.css" rel="stylesheet" />
     <title>Weather Widget Demo</title>
   </head>
   <body>
-    <weather-widget></weather-widget>
-    <script type="module" src="/src/main.ts"></script>
     <script type="module">
       import { register } from "/src/main.ts";
 
       register();
     </script>
+    <script type="module" src="/src/main.ts"></script>
+    <weather-widget
+      lat="-23.5475"
+      lon="-46.6361"
+      location="Sao Paulo"
+    ></weather-widget>
   </body>
 </html>
