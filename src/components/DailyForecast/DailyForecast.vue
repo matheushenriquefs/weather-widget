@@ -30,7 +30,7 @@ const props = withDefaults(
 const date = computed(() => {
   const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat("en-US", {
     weekday: "short",
   })
     .format(props.dailyForecast.date + timezoneOffset)
