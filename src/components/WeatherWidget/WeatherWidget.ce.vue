@@ -9,10 +9,16 @@ import { useGetDailyForecastsFn } from "../../composables/useGetDailyForecastsFn
 import { useGetForecastParamsFn } from "../../composables/useGetForecastParamsFn";
 import { type GroupedForecast, type WeatherWidgetProps } from "../../types";
 
+const openMeteoApiUrl = `${import.meta.env.VITE_OPEN_METEO_API_URL}/forecast`;
+
 const props = withDefaults(defineProps<WeatherWidgetProps>(), {
   lat: 0,
   lon: 0,
   location: "",
+  options: () => ({
+    temperatureUnit: "celsius",
+    windSpeedUnit: "kmh",
+  }),
 });
 
 const groupedForecast = ref<GroupedForecast>({
@@ -24,8 +30,10 @@ const isLoading = ref(true);
 
 onBeforeMount(async () => {
   const forecastParams = await useGetForecastParamsFn(props);
-  const url = `${import.meta.env.VITE_OPEN_METEO_API_URL}/forecast`;
-  const [response] = await fetchWeatherApi(url, forecastParams.params);
+  const [response] = await fetchWeatherApi(
+    openMeteoApiUrl,
+    forecastParams.params,
+  );
   const current = response.current();
   const daily = response.daily();
   const currentForecast = useGetCurrentForecastFn(
@@ -62,6 +70,7 @@ onBeforeMount(async () => {
       :current-forecast="groupedForecast.current"
       :is-loading="isLoading"
       :location="groupedForecast.location"
+      :options="options"
       class="grid current-forecast-grid"
     />
     <div class="grid daily-forecast-container">
@@ -79,6 +88,7 @@ onBeforeMount(async () => {
           :key="i + 1"
           :is-loading="false"
           :daily-forecast="dailyForecast"
+          :options="options"
           class="column"
         />
       </div>

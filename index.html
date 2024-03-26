@@ -11,6 +11,11 @@
       import { register } from "/src/main.ts";
 
       register();
+
+      document.querySelector("weather-widget").options = {
+        temperatureUnit: "fahrenheit",
+        windSpeedUnit: "mph",
+      };
     </script>
     <script type="module" src="/src/main.ts"></script>
     <weather-widget

@@ -3,13 +3,15 @@ import { computed } from "vue";
 
 import { ThePlaceholder } from "../ThePlaceholder";
 import { TemperatureLabel } from "../TemperatureLabel";
-import { useGetForecastIconFn } from "../../composables/useGetForecastIconFn";
-import { type DailyForecast } from "../../types";
+import { useGetWeatherLabelFn } from "../../composables/useGetWeatherLabelFn";
+import { useFormatTemperatureFn } from "../../composables/useFormatTemperatureFn";
+import { type DailyForecast, type WeatherWidgetProps } from "../../types";
 
 const props = withDefaults(
   defineProps<{
     isLoading?: boolean;
     dailyForecast?: DailyForecast;
+    options?: WeatherWidgetProps["options"];
   }>(),
   {
     isLoading: true,
@@ -23,6 +25,9 @@ const props = withDefaults(
         code: 0,
         label: "",
       },
+    }),
+    options: () => ({
+      temperatureUnit: "celsius",
     }),
   },
 );
@@ -38,7 +43,21 @@ const date = computed(() => {
     .map((letter, i) => (i === 0 ? letter.toUpperCase() : letter))
     .join("");
 });
-const ForecastIcon = computed(() => useGetForecastIconFn(props.dailyForecast));
+
+const ForecastIcon = computed(
+  () => useGetWeatherLabelFn(props.dailyForecast.weather.code).icon,
+);
+
+const temperature = computed(() => ({
+  min: useFormatTemperatureFn(
+    props.dailyForecast.temperature.min,
+    props.options.temperatureUnit,
+  ),
+  max: useFormatTemperatureFn(
+    props.dailyForecast.temperature.max,
+    props.options.temperatureUnit,
+  ),
+}));
 </script>
 
 <template>
@@ -53,24 +72,21 @@ const ForecastIcon = computed(() => useGetForecastIconFn(props.dailyForecast));
         :is-loading="isLoading"
         style="width: 32px; height: 32px; margin-bottom: 16px"
       >
-        <component
-          :is="ForecastIcon"
-          :size="32"
-          class="daily-forecast-icon"
-          aria-busy="false"
-        />
+        <Suspense>
+          <ForecastIcon />
+        </Suspense>
       </ThePlaceholder>
     </header>
     <footer class="daily-forecast-footer">
       <ThePlaceholder :is-loading="isLoading" style="width: 18px; height: 14px">
-        <TemperatureLabel aria-busy="false"
-          >{{ dailyForecast.temperature.max }}˚C</TemperatureLabel
-        >
+        <TemperatureLabel aria-busy="false">{{
+          temperature.max
+        }}</TemperatureLabel>
       </ThePlaceholder>
       <ThePlaceholder :is-loading="isLoading" style="width: 18px; height: 14px">
-        <TemperatureLabel aria-busy="false" label="min"
-          >{{ dailyForecast.temperature.min }}˚C</TemperatureLabel
-        >
+        <TemperatureLabel aria-busy="false" label="min">{{
+          temperature.min
+        }}</TemperatureLabel>
       </ThePlaceholder>
     </footer>
   </article>

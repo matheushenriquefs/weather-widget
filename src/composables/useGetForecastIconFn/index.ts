@@ -1,1 +1,0 @@
-export { useGetForecastIconFn } from "./useGetForecastIconFn";
