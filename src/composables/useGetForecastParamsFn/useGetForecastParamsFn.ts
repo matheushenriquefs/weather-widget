@@ -2,8 +2,8 @@ import { type WeatherWidgetProps, type LocationAddress } from "../../types";
 
 export const useGetForecastParamsFn = async (props: WeatherWidgetProps) => {
   const params = {
-    latitude: props.lat as number,
-    longitude: props.lon as number,
+    latitude: props.lat,
+    longitude: props.lon,
     current: [
       "weather_code",
       "temperature_2m",
