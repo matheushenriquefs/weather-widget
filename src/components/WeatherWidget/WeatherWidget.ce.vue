@@ -105,7 +105,7 @@ onBeforeMount(async () => {
 @import "../CurrentForecast/index.css";
 @import "../DailyForecast/index.css";
 @import "../TemperatureLabel/index.css";
-@import "../../assets/stylesheets/icons.css";
+@import "../TheIcon/index.css";
 
 :host {
   display: block;
