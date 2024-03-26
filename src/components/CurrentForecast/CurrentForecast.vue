@@ -62,12 +62,21 @@ const windSpeed = computed(() =>
     </section>
     <div class="column current-forecast-column">
       <ThePlaceholder :is-loading="isLoading" style="width: 100%; height: 48px">
-        <component
-          :is="ForecastIcon"
-          :size="48"
-          aria-busy="false"
-          style="margin: 4px"
-        />
+        <Suspense>
+          <component
+            :is="ForecastIcon"
+            :size="48"
+            aria-busy="false"
+            style="margin: 4px"
+          />
+
+          <template #fallback>
+            <ThePlaceholder
+              :is-loading
+              style="width: 100%; height: 48px"
+            ></ThePlaceholder>
+          </template>
+        </Suspense>
       </ThePlaceholder>
       <ThePlaceholder :is-loading="isLoading" style="width: 100%; height: 24px">
         <small class="current-forecast-weather" aria-busy="false">{{

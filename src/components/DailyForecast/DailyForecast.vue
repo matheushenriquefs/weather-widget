@@ -70,10 +70,19 @@ const temperature = computed(() => ({
       </ThePlaceholder>
       <ThePlaceholder
         :is-loading="isLoading"
-        style="width: 32px; height: 32px; margin-bottom: 16px"
+        style="width: 32px; height: 32px"
+        class="daily-forecast-icon"
       >
         <Suspense>
-          <ForecastIcon />
+          <ForecastIcon class="daily-forecast-icon" />
+
+          <template #fallback>
+            <ThePlaceholder
+              :is-loading
+              style="width: 32px; height: 32px"
+              class="daily-forecast-icon"
+            ></ThePlaceholder>
+          </template>
         </Suspense>
       </ThePlaceholder>
     </header>
