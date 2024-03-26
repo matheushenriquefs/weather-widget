@@ -1,52 +1,65 @@
 import { defineAsyncComponent } from "vue";
+import { TheIconPlaceholder } from "../TheIconPlaceholder";
 
-const SunIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/sun"),
-);
+const SunIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/sun"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const SunMediumIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/sun-medium"),
-);
+const SunMediumIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/sun-medium"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudSunIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-sun"),
-);
+const CloudSunIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-sun"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudyIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloudy"),
-);
+const CloudyIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloudy"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudDrizzleIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-drizzle"),
-);
+const CloudDrizzleIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-drizzle"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudFogIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-fog"),
-);
+const CloudFogIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-fog"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudHailIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-hail"),
-);
+const CloudHailIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-hail"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudSnowIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-snow"),
-);
+const CloudSnowIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-snow"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudRainIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-rain"),
-);
+const CloudRainIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-rain"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudRainWindIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-rain-wind"),
-);
+const CloudRainWindIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-rain-wind"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const CloudLightningIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/cloud-lightning"),
-);
+const CloudLightningIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/cloud-lightning"),
+  loadingComponent: TheIconPlaceholder,
+});
 
-const SnowflakeIcon = defineAsyncComponent(
-  () => import("lucide-vue-next/dist/esm/icons/snowflake"),
-);
+const SnowflakeIcon = defineAsyncComponent({
+  loader: () => import("lucide-vue-next/dist/esm/icons/snowflake"),
+  loadingComponent: TheIconPlaceholder,
+});
 
 export {
   SunIcon,
