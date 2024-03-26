@@ -44,8 +44,14 @@ export type LocationAddress = {
   };
 };
 
+export type WeatherWidgetPropsOptions = {
+  temperatureUnit?: "celsius" | "fahrenheit";
+  windSpeedUnit?: "kmh" | "mph";
+};
+
 export type WeatherWidgetProps = {
   lat?: number;
   lon?: number;
   location?: string;
+  options?: WeatherWidgetPropsOptions;
 };
