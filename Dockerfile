@@ -6,8 +6,6 @@ RUN apk update
 
 RUN apk upgrade
 
-RUN apk add git --no-cache
-
 COPY package*.json .
 
 RUN npm install
