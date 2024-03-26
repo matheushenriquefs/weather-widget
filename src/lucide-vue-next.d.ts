@@ -1,0 +1,12 @@
+declare module "lucide-vue-next/dist/esm/icons/sun";
+declare module "lucide-vue-next/dist/esm/icons/sun-medium";
+declare module "lucide-vue-next/dist/esm/icons/cloud-sun";
+declare module "lucide-vue-next/dist/esm/icons/cloud-fog";
+declare module "lucide-vue-next/dist/esm/icons/cloud-drizzle";
+declare module "lucide-vue-next/dist/esm/icons/cloud-snow";
+declare module "lucide-vue-next/dist/esm/icons/cloud-rain";
+declare module "lucide-vue-next/dist/esm/icons/cloud-rain-wind";
+declare module "lucide-vue-next/dist/esm/icons/cloud-lightning";
+declare module "lucide-vue-next/dist/esm/icons/cloud-hail";
+declare module "lucide-vue-next/dist/esm/icons/snowflake";
+declare module "lucide-vue-next/dist/esm/icons/cloudy";

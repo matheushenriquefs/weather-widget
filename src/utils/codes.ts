@@ -1,17 +1,17 @@
 import {
-  Sun as SunIcon,
-  SunMedium as SunMediumIcon,
-  CloudSun as CloudSunIcon,
-  Cloudy as CloudyIcon,
-  CloudDrizzle as CloudDrizzleIcon,
-  CloudFog as CloudFogIcon,
-  CloudHail as CloudHailIcon,
-  CloudSnow as CloudSnowIcon,
-  CloudRain as CloudRainIcon,
-  CloudRainWind as CloudRainWindIcon,
-  CloudLightning as CloudLightningIcon,
-  Snowflake as SnowflakeIcon,
-} from "lucide-vue-next";
+  SunIcon,
+  SunMediumIcon,
+  CloudSunIcon,
+  CloudyIcon,
+  CloudDrizzleIcon,
+  CloudFogIcon,
+  CloudHailIcon,
+  CloudSnowIcon,
+  CloudRainIcon,
+  CloudRainWindIcon,
+  CloudLightningIcon,
+  SnowflakeIcon,
+} from "../components/TheIcon";
 
 export const codes = {
   0: {
