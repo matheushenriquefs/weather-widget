@@ -1,16 +1,15 @@
 version: "3.8"
 services:
   weather-widget:
-    platform: linux/amd64
     build: .
     image: weather-widget
     container_name: weather-widget
-    working_dir: /app
+    working_dir: /var/www
     ports:
       - 3000:3000
       - 3333:3333
     volumes:
-      - .:/app
+      - .:/var/www
     env_file:
       - .env
     command: sh ./entrypoint.sh
