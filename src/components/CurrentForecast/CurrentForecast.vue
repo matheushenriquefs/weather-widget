@@ -72,7 +72,7 @@ const windSpeed = computed(() =>
 
           <template #fallback>
             <ThePlaceholder
-              :is-loading
+              :is-loading="isLoading"
               style="width: 100%; height: 48px"
             ></ThePlaceholder>
           </template>
