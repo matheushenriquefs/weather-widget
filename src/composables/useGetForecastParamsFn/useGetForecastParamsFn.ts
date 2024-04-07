@@ -1,3 +1,4 @@
+import { coordinates } from "../../utils/coordinates";
 import { type WeatherWidgetProps, type LocationAddress } from "../../types";
 
 export const useGetForecastParamsFn = async (props: WeatherWidgetProps) => {
@@ -17,9 +18,9 @@ export const useGetForecastParamsFn = async (props: WeatherWidgetProps) => {
   let location = props.location;
 
   if (!props.lat || !props.lon) {
-    params.latitude = 51.477928;
-    params.longitude = -0.001545;
-    location = "London";
+    params.latitude = coordinates.latitude;
+    params.longitude = coordinates.longitude;
+    location = coordinates.location;
   }
 
   if (!location) {
